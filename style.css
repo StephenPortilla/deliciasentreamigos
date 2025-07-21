@@ -1,0 +1,23 @@
+.bg-hero {
+    background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('Media/BANER.png');
+    background-size: cover;
+    background-position: center;
+}
+
+.dish-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+}
+
+.active-category {
+    background-color: #ef4444;
+    color: white;
+}
+
+#cart-items::-webkit-scrollbar {
+    width: 5px;
+}
+#cart-items::-webkit-scrollbar-thumb {
+    background-color: #ef4444;
+    border-radius: 10px;
+}

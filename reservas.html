@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Reservas - Delicias Entre Amigos</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .bg-hero {
+            background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('Media/BANER.png');
+            background-size: cover;
+            background-position: center;
+        }
+        .dish-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+        select::-webkit-scrollbar {
+            width: 5px;
+        }
+        select::-webkit-scrollbar-thumb {
+            background-color: #ef4444;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body class="font-sans bg-gray-50 text-black min-h-screen flex flex-col">
+
+<!-- Menú -->
+<header class="bg-white shadow-sm sticky top-0 z-10">
+    <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+        <h1 class="text-2xl font-bold text-gray-800">Delicias Entre Amigos</h1>
+        <nav class="hidden md:flex space-x-8">
+            <a href="index.html#hero" class="text-gray-600 hover:text-red-500">Inicio</a>
+            <a href="contacto.html" class="text-gray-600 hover:text-red-500">Contacto</a>
+            <a href="reservas.html" class="text-gray-600 hover:text-red-500">Reservas</a>
+            <a href="carrito.html" class="relative text-red-500 font-medium">🛒
+                <span id="cart-count" class="absolute -top-2 -right-3 bg-red-500 text-white text-xs rounded-full px-1">0</span>
+            </a>
+        </nav>
+    </div>
+</header>
+
+<!-- Sección de reservas -->
+<section class="py-16 bg-hero flex-grow">
+    <div class="container mx-auto px-4 flex flex-col md:flex-row justify-center md:justify-center items-start gap-8">
+
+        <!-- Formulario de reserva -->
+        <div class="bg-white rounded-lg shadow-lg p-6 max-w-md w-full dish-card transition-transform flex-1">
+            <div class="text-center mb-4">
+                <h2 class="text-3xl font-bold text-gray-800 mb-2">Reserva en Línea</h2>
+                <p class="text-gray-600">Reserva tu mesa de forma rápida y sencilla.</p>
+            </div>
+            <form id="reserva-form" class="space-y-4">
+                <input type="text" id="nombre" placeholder="Nombre completo" class="w-full p-3 border border-gray-300 rounded" required />
+                <input type="email" id="correo" placeholder="Correo electrónico" class="w-full p-3 border border-gray-300 rounded" required />
+                <input type="date" id="fecha" class="w-full p-3 border border-gray-300 rounded" required />
+                <select id="mesa" class="w-full p-3 border border-gray-300 rounded" required>
+                    <option value="">Selecciona una mesa</option>
+                    <option value="Mesa 1 - 2 personas">Mesa 1 - 2 personas</option>
+                    <option value="Mesa 2 - 4 personas">Mesa 2 - 4 personas</option>
+                    <option value="Mesa 3 - 6 personas">Mesa 3 - 6 personas</option>
+                </select>
+                <button type="submit" class="w-full bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded transition-colors">Reservar Ahora</button>
+            </form>
+        </div>
+
+        <!-- Comprobante de reserva -->
+        <div id="reserva-detalles" class="hidden bg-white rounded-lg shadow-lg p-6 max-w-md w-full dish-card transition-transform flex-1">
+            <h3 class="text-2xl font-bold text-green-700 mb-4 text-center">✅ Reserva Finalizada</h3>
+            <div class="space-y-2 text-gray-800">
+                <p><span class="font-semibold">Nombre:</span> <span id="detalle-nombre"></span></p>
+                <p><span class="font-semibold">Correo:</span> <span id="detalle-correo"></span></p>
+                <p><span class="font-semibold">Fecha:</span> <span id="detalle-fecha"></span></p>
+                <p><span class="font-semibold">Mesa:</span> <span id="detalle-mesa"></span></p>
+            </div>
+            <p class="mt-4 text-green-700 text-center">¡Gracias por reservar en Delicias Entre Amigos!</p>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer class="bg-gray-800 text-white text-center py-6 mt-auto">
+    © 2025 Delicias Entre Amigos. Todos los derechos reservados.
+</footer>
+
+<!-- JS -->
+<script>
+document.getElementById('reserva-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    // Capturar datos
+    const nombre = document.getElementById('nombre').value;
+    const correo = document.getElementById('correo').value;
+    const fecha = document.getElementById('fecha').value;
+    const mesa = document.getElementById('mesa').value;
+
+    // Colocar en el comprobante
+    document.getElementById('detalle-nombre').textContent = nombre;
+    document.getElementById('detalle-correo').textContent = correo;
+    document.getElementById('detalle-fecha').textContent = fecha;
+    document.getElementById('detalle-mesa').textContent = mesa;
+
+    // Mostrar comprobante
+    document.getElementById('reserva-detalles').classList.remove('hidden');
+
+    // Limpiar formulario
+    this.reset();
+
+    // Confirmación opcional
+    alert('¡Reserva realizada exitosamente! Gracias por elegirnos.');
+});
+</script>
+</body>
+</html>

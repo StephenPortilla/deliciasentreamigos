@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Delicias Entre Amigos</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .bg-hero {
+            background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('./Media/BANER.png');
+            background-size: cover;
+            background-position: center;
+        }
+        .dish-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px -5px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body class="font-sans bg-gray-50">
+
+    <!-- Menú -->
+    <header class="bg-white shadow-sm sticky top-0 z-10">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <h1 class="text-2xl font-bold text-gray-800">Delicias Entre Amigos</h1>
+            <nav class="hidden md:flex space-x-8">
+                <a href="index.html#hero" class="text-gray-600 hover:text-red-500">Inicio</a>
+                <a href="contacto.html" class="text-gray-600 hover:text-red-500">Contacto</a>
+                <a href="reservas.html" class="text-gray-600 hover:text-red-500">Reservas</a>
+                <a href="carrito.html" class="relative text-red-500 font-medium">🛒
+                    <span id="cart-count" class="absolute -top-2 -right-3 bg-red-500 text-white text-xs rounded-full px-1">0</span>
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section id="hero" class="bg-hero text-white py-24 text-center">
+        <h2 class="text-4xl md:text-5xl font-bold mb-4">Bienvenido a Delicias Entre Amigos</h2>
+        <p class="text-xl mb-6">Sabores que unen amigos con experiencias inolvidables.</p>
+        <a href="#catalogo" class="bg-red-500 hover:bg-red-600 text-white px-6 py-3 rounded-full">Ver Menú</a>
+    </section>
+
+    <!-- Buscador y Categorías -->
+    <div class="bg-white shadow-sm sticky top-0 z-20">
+        <div class="container mx-auto px-4 py-2 flex flex-col md:flex-row justify-between items-center space-y-2 md:space-y-0">
+            <input id="searchInput" type="text" placeholder="Buscar platos..." class="w-full md:w-1/3 p-2 border border-gray-300 rounded-lg" />
+            <div class="flex space-x-2">
+                <button class="category-btn bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded" data-category="Alitas">Alitas</button>
+                <button class="category-btn bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded" data-category="Plato">Platos a la Carta</button>
+                <button class="category-btn bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded" data-category="Comida">Comida Rápida</button>
+                <button class="category-btn bg-gray-300 hover:bg-gray-400 text-gray-800 px-3 py-1 rounded" data-category="Todos">Todos</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Catálogo -->
+    <section id="catalogo" class="py-16 bg-white">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl font-bold mb-8 text-gray-800">Nuestro Catálogo</h2>
+            <div id="productGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Productos se cargan aquí -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white text-center py-6">
+        © 2025 Delicias Entre Amigos. Todos los derechos reservados.
+    </footer>
+
+<script>
+// Inicializa el carrito
+if (!localStorage.getItem('cartItems')) {
+    localStorage.setItem('cartItems', JSON.stringify([]));
+}
+
+// Actualiza contador
+function updateCartCount() {
+    const cartItems = JSON.parse(localStorage.getItem('cartItems'));
+    const count = cartItems.reduce((acc, item) => acc + item.quantity, 0);
+    document.getElementById('cart-count').textContent = count;
+}
+updateCartCount();
+
+// Productos completos
+const productos = [
+    { nombre: "Alitas BBQ", descripcion: "Alitas con salsa BBQ", precio: "S/ 12.90", imagen: "./Media/BBQ.jpg", categoria: "Alitas" },
+    { nombre: "Alitas Acevichadas", descripcion: "Alitas con salsa acevichada", precio: "S/ 12.90", imagen: "./Media/ACEVICHADAS.jpg", categoria: "Alitas" },
+    { nombre: "Alitas Al Olivo", descripcion: "Alitas con salsa de olivo", precio: "S/ 12.90", imagen: "./Media/ALOLIVO.jpg", categoria: "Alitas" },
+    { nombre: "Alitas BBQ Picante", descripcion: "Alitas BBQ con toque picante", precio: "S/ 12.90", imagen: "./Media/BBQPICANTE.jpg", categoria: "Alitas" },
+    { nombre: "Alitas Chimichurri", descripcion: "Alitas con chimichurri", precio: "S/ 12.90", imagen: "./Media/CHIMICHURRI.jpg", categoria: "Alitas" },
+    { nombre: "Alitas Lemon Kay", descripcion: "Alitas con salsa Lemon Kay", precio: "S/ 12.90", imagen: "./Media/LEMONKAY.jpg", categoria: "Alitas" },
+    { nombre: "Alitas Maracuya", descripcion: "Alitas con salsa de maracuya", precio: "S/ 12.90", imagen: "./Media/MARACUYA.jpg", categoria: "Alitas" },
+    { nombre: "Chuleta", descripcion: "Chuleta con guarnición", precio: "S/ 18.90", imagen: "./Media/CHULETA.jpg", categoria: "Plato" },
+    { nombre: "Churrasco", descripcion: "Churrasco con papas", precio: "S/ 20.90", imagen: "./Media/CHURRASCO.jpg", categoria: "Plato" },
+    { nombre: "Lomo de Carne", descripcion: "Lomo saltado de carne", precio: "S/ 19.90", imagen: "./Media/LOMOCARNE.jpg", categoria: "Plato" },
+    { nombre: "Lomo de Pollo", descripcion: "Lomo saltado de pollo", precio: "S/ 18.90", imagen: "./Media/LOMOPOLLO.jpg", categoria: "Plato" },
+    { nombre: "Mostrito", descripcion: "Pollo con arroz chaufa y papas", precio: "S/ 16.90", imagen: "./Media/MOSTRITO.jpg", categoria: "Comida" },
+    { nombre: "Pollo Broaster", descripcion: "Pollo frito crocante", precio: "S/ 15.90", imagen: "./Media/POLLOBROASTER.jpg", categoria: "Comida" },
+    { nombre: "Pollo a la Plancha", descripcion: "Pollo a la plancha con ensalada", precio: "S/ 15.90", imagen: "./Media/POLLOPLANCHA.jpg", categoria: "Comida" },
+    { nombre: "Salchipapa", descripcion: "Salchipapa tradicional", precio: "S/ 10.90", imagen: "./Media/SALCHIPAPA.jpg", categoria: "Comida" },
+    { nombre: "Salchipollo", descripcion: "Salchipapa con pollo", precio: "S/ 12.90", imagen: "./Media/SALCHIPOLLO.jpg", categoria: "Comida" }
+];
+
+// Renderizado dinámico
+const productGrid = document.getElementById('productGrid');
+function renderProductos(filtroCategoria = "Todos", busqueda = "") {
+    productGrid.innerHTML = "";
+    productos.forEach(prod => {
+        const coincideCategoria = filtroCategoria === "Todos" || prod.categoria === filtroCategoria;
+        const coincideBusqueda = prod.nombre.toLowerCase().includes(busqueda.toLowerCase());
+        if (coincideCategoria && coincideBusqueda) {
+            const card = document.createElement('div');
+            card.className = "dish-card bg-white rounded-lg overflow-hidden shadow-md transition-transform";
+            card.innerHTML = `
+                <img src="${prod.imagen}" alt="${prod.nombre}" class="w-full h-48 object-cover">
+                <div class="p-5">
+                    <h3 class="text-xl font-bold mb-2">${prod.nombre}</h3>
+                    <p class="text-gray-600 mb-4">${prod.descripcion}</p>
+                    <div class="flex justify-between items-center">
+                        <span class="price text-red-500 font-bold text-lg">${prod.precio}</span>
+                        <button class="add-btn bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-full text-sm">Añadir</button>
+                    </div>
+                </div>
+            `;
+            productGrid.appendChild(card);
+        }
+    });
+}
+renderProductos();
+
+// Buscador
+document.getElementById('searchInput').addEventListener('input', e => {
+    renderProductos(document.querySelector('.category-btn.bg-red-600')?.dataset.category || "Todos", e.target.value);
+});
+
+// Filtro por categoría
+document.querySelectorAll('.category-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+        document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('bg-red-600', 'text-white'));
+        btn.classList.add('bg-red-600', 'text-white');
+        renderProductos(btn.dataset.category, document.getElementById('searchInput').value);
+    });
+});
+
+// Delegación para botones Añadir
+productGrid.addEventListener('click', e => {
+    if (e.target.classList.contains('add-btn')) {
+        const card = e.target.closest('.dish-card');
+        const title = card.querySelector('h3').textContent;
+        const price = parseFloat(card.querySelector('.price').textContent.replace('S/ ', ''));
+        let cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+        const idx = cartItems.findIndex(item => item.title === title);
+        if (idx !== -1) {
+            cartItems[idx].quantity += 1;
+        } else {
+            cartItems.push({ title, price, quantity: 1 });
+        }
+        localStorage.setItem('cartItems', JSON.stringify(cartItems));
+        updateCartCount();
+        alert(`${title} añadido al carrito.`);
+    }
+});
+</script>
+</body>
+</html>
