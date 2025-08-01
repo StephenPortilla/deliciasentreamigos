@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Carrito - Delicias Entre Amigos</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Roboto:wght@400;500&family=Great+Vibes&display=swap" rel="stylesheet">
+</head>
+<style>
+    body {
+      font-family: 'Roboto', sans-serif;
+    }
+    h1, h2, h3 {
+      font-family: 'Playfair Display', serif;
+    }
+    .font-cursive {
+      font-family: 'Great Vibes', cursive;
+      font-weight: normal;
+      font-size: 2.4rem;
+      letter-spacing: 1px;
+    }
+</style>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const toggleBtn = document.getElementById("menuToggle");
+    const mobileMenu = document.getElementById("mobileMenu");
+
+    toggleBtn.addEventListener("click", function () {
+        mobileMenu.classList.toggle("hidden");
+    });
+});
+</script>
+
+<body class="bg-gray-100">
+<!-- Menú Responsive -->
+<header class="bg-white shadow-sm sticky top-0 z-10">
+  <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+    <h1 class="text-3xl text-[#8b1e1e] font-cursive">Delicias Entre Amigos</h1>
+
+    <!-- Botón Hamburguesa -->
+    <button id="menuToggle" class="md:hidden text-gray-800 text-3xl focus:outline-none">
+      ☰
+    </button>
+
+    <!-- Menú en pantallas grandes -->
+    <nav class="hidden md:flex space-x-8">
+      <a href="index.html#hero" class="text-gray-600 hover:text-red-500">Inicio</a>
+      <a href="contacto.html" class="text-gray-600 hover:text-red-500">Contacto</a>
+      <a href="reservas.html" class="text-gray-600 hover:text-red-500">Reservas</a>
+      <a href="reseñas.html" class="text-red-500 font-medium">Reseñas</a>
+      <a href="carrito.html" class="relative text-red-500 font-medium">🛒
+        <span id="cart-count" class="absolute -top-2 -right-3 bg-red-500 text-white text-xs rounded-full px-1">0</span>
+      </a>
+    </nav>
+  </div>
+
+  <!-- Menú móvil desplegable -->
+  <nav id="mobileMenu" class="hidden md:hidden px-4 pb-4 space-y-2">
+    <a href="index.html#hero" class="block text-gray-600 hover:text-red-500">Inicio</a>
+    <a href="contacto.html" class="block text-gray-600 hover:text-red-500">Contacto</a>
+    <a href="reservas.html" class="block text-gray-600 hover:text-red-500">Reservas</a>
+    <a href="reseñas.html" class="block text-red-500 font-medium">Reseñas</a>
+    <a href="carrito.html" class="relative block text-red-500 font-medium">🛒
+      <span class="absolute -top-2 -right-3 bg-red-500 text-white text-xs rounded-full px-1" id="cart-count">0</span>
+    </a>
+  </nav>
+</header>
+
+<!-- Contenido principal -->
+<main class="container mx-auto px-4 py-8 min-h-[70vh]">
+  <h2 class="text-2xl font-bold mb-6">Tu Carrito</h2>
+
+  <div id="cart-items" class="space-y-4"></div>
+
+  <!-- Mensaje cuando el carrito está vacío -->
+  <div id="empty-message" class="text-center mt-10 hidden">
+    <p class="text-gray-500 text-lg">Tu carrito está vacío</p>
+    <a href="index.html" class="mt-4 inline-block bg-blue-500 text-white px-6 py-2 rounded hover:bg-blue-600">
+      Ver platos
+    </a>
+  </div>
+
+  <!-- Botón de finalizar compra -->
+  <div id="finalizar-compra-contenedor" class="text-right mt-8 hidden">
+    <p id="cart-total" class="text-xl font-bold mb-4"></p>
+    <button id="finalizar-compra"
+      class="bg-green-500 text-white px-6 py-2 rounded hover:bg-green-600 transition-all duration-200">
+      Finalizar compra
+    </button>
+  </div>
+
+  <!-- Formulario (oculto por defecto) -->
+  <div id="formulario-pedido" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+    <div class="bg-white p-6 rounded-lg shadow-lg w-full max-w-md">
+      <h3 class="text-xl font-bold mb-4">Completa tu pedido</h3>
+      <form id="pedido-form">
+        <input type="text" name="nombre" placeholder="Nombre" class="w-full mb-2 p-2 border rounded" required>
+        <input type="text" name="apellidos" placeholder="Apellidos" class="w-full mb-2 p-2 border rounded" required>
+        <input type="text" name="numero" placeholder="Número de celular" class="w-full mb-2 p-2 border rounded" required>
+        <input type="text" name="dni" placeholder="DNI" class="w-full mb-2 p-2 border rounded" required>
+
+        <select name="tipo" id="tipo-pedido" class="w-full mb-2 p-2 border rounded" required>
+          <option value="" disabled selected>Selecciona tipo de pedido</option>
+          <option value="delivery">Delivery</option>
+          <option value="mesa">Pedido a mesa</option>
+        </select>
+
+        <textarea name="direccion" id="campo-direccion" placeholder="Dirección" class="w-full mb-2 p-2 border rounded hidden"></textarea>
+
+        <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Enviar pedido por WhatsApp</button>
+        <button type="button" onclick="cerrarFormulario()" class="ml-2 text-gray-600 hover:text-gray-800">Cancelar</button>
+      </form>
+    </div>
+  </div>
+</main>
+
+<!-- Pie de página -->
+<footer class="bg-white shadow-inner mt-10 py-4">
+  <div class="container mx-auto px-4 text-center text-gray-500">
+    © 2025 Delicias Entre Amigos. Todos los derechos reservados.
+  </div>
+</footer>
+
+<!-- Lógica del carrito -->
+<script>
+  const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+  const cartContainer = document.getElementById('cart-items');
+  const cartTotal = document.getElementById('cart-total');
+  const finalizarContenedor = document.getElementById('finalizar-compra-contenedor');
+  const finalizarBtn = document.getElementById('finalizar-compra');
+  const emptyMessage = document.getElementById('empty-message');
+
+  function actualizarContadorCarrito() {
+    const contador = document.getElementById('cart-count');
+    const totalCantidad = cartItems.reduce((acc, item) => acc + item.quantity, 0);
+    if (contador) {
+      contador.textContent = totalCantidad;
+    }
+  }
+
+  function renderCart() {
+    cartContainer.innerHTML = '';
+
+    if (cartItems.length === 0) {
+      emptyMessage.classList.remove('hidden');
+      cartTotal.textContent = '';
+      finalizarContenedor.classList.add('hidden');
+    } else {
+      emptyMessage.classList.add('hidden');
+      finalizarContenedor.classList.remove('hidden');
+    }
+
+    let total = 0;
+
+    cartItems.forEach((item, index) => {
+      const itemTotal = item.price * item.quantity;
+      total += itemTotal;
+
+      cartContainer.innerHTML += `
+        <div class="flex items-center justify-between border-b py-3">
+          <div class="flex items-center gap-4">
+            <img src="${item.image || 'https://via.placeholder.com/80'}" alt="${item.title}" class="w-20 h-20 object-cover rounded">
+            <div>
+              <h3 class="font-semibold text-lg">${item.title}</h3>
+              <p class="text-sm text-gray-500">S/ ${item.price.toFixed(2)}</p>
+              <div class="flex items-center gap-2 mt-1">
+                <button onclick="decreaseQuantity(${index})" class="bg-red-500 text-white px-2 py-1 rounded">-</button>
+                <span class="font-medium">${item.quantity}</span>
+                <button onclick="increaseQuantity(${index})" class="bg-green-500 text-white px-2 py-1 rounded">+</button>
+                <button onclick="removeItem(${index})" class="ml-2 text-red-600 hover:text-red-800">Eliminar</button>
+              </div>
+            </div>
+          </div>
+          <div class="text-right font-bold text-lg">S/ ${itemTotal.toFixed(2)}</div>
+        </div>
+      `;
+    });
+
+    cartTotal.textContent = `Total: S/ ${total.toFixed(2)}`;
+    actualizarContadorCarrito();
+  }
+
+  function increaseQuantity(index) {
+    cartItems[index].quantity++;
+    localStorage.setItem('cartItems', JSON.stringify(cartItems));
+    renderCart();
+  }
+
+  function decreaseQuantity(index) {
+    if (cartItems[index].quantity > 1) {
+      cartItems[index].quantity--;
+    } else {
+      cartItems.splice(index, 1);
+    }
+    localStorage.setItem('cartItems', JSON.stringify(cartItems));
+    renderCart();
+  }
+
+  function removeItem(index) {
+    cartItems.splice(index, 1);
+    localStorage.setItem('cartItems', JSON.stringify(cartItems));
+    renderCart();
+  }
+
+  finalizarBtn.addEventListener('click', () => {
+    document.getElementById('formulario-pedido').classList.remove('hidden');
+  });
+
+  function cerrarFormulario() {
+    document.getElementById('formulario-pedido').classList.add('hidden');
+  }
+
+  document.getElementById('tipo-pedido').addEventListener('change', function () {
+    const direccion = document.getElementById('campo-direccion');
+    if (this.value === 'delivery') {
+      direccion.classList.remove('hidden');
+      direccion.required = true;
+      direccion.value = '';
+    } else {
+      direccion.classList.add('hidden');
+      direccion.required = false;
+      direccion.value = '';
+    }
+  });
+
+  document.getElementById('pedido-form').addEventListener('submit', function (e) {
+    e.preventDefault();
+    const formData = new FormData(this);
+    let mensaje = 'Hola, quiero hacer un pedido:\n';
+    cartItems.forEach(item => {
+      mensaje += `- ${item.quantity} x ${item.title} (S/ ${item.price})\n`;
+    });
+    mensaje += `\nTotal: ${cartTotal.textContent}`;
+
+    mensaje += `\n\nDatos del cliente:\n`;
+    const tipoPedido = formData.get('tipo');
+
+    formData.forEach((value, key) => {
+      if (key === 'direccion' && tipoPedido !== 'delivery') return;
+      mensaje += `${key.charAt(0).toUpperCase() + key.slice(1)}: ${value}\n`;
+    });
+
+    const whatsappURL = `https://wa.me/51994877356?text=${encodeURIComponent(mensaje)}`;
+    window.open(whatsappURL, '_blank');
+  });
+
+  renderCart();
+</script>
+
+</body>
+</html>

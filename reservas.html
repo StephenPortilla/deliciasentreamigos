@@ -1,0 +1,156 @@
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Reservas - Delicias Entre Amigos</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Raleway:wght@400;600&family=Great+Vibes&display=swap" rel="stylesheet">
+  
+  <style>
+    body {
+      font-family: 'Roboto', sans-serif;
+    }
+    h1, h2, h3 {
+      font-family: 'Playfair Display', serif;
+    }
+    .font-cursive {
+      font-family: 'Great Vibes', cursive;
+      font-weight: normal;
+      font-size: 2.4rem;
+      letter-spacing: 1px;
+    }
+    .bg-hero {
+      background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('./Media/BANER.png');
+      background-size: cover;
+      background-position: center;
+    }
+    .dish-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+    }
+    select::-webkit-scrollbar {
+      width: 5px;
+    }
+    select::-webkit-scrollbar-thumb {
+      background-color: #991b1b;
+      border-radius: 10px;
+    }
+  </style>
+</head>
+
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const toggleBtn = document.getElementById("menuToggle");
+  const mobileMenu = document.getElementById("mobileMenu");
+
+  toggleBtn.addEventListener("click", function () {
+    mobileMenu.classList.toggle("hidden");
+  });
+});
+</script>
+
+<body class="bg-[#fdfaf6] text-gray-800 min-h-screen flex flex-col">
+
+<!-- Menú -->
+<header class="bg-white shadow-md sticky top-0 z-10">
+  <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+<h1 class="text-3xl text-[#8b1e1e] font-cursive">Delicias Entre Amigos</h1>
+    <button id="menuToggle" class="md:hidden text-3xl text-[#7c2d12] focus:outline-none">☰</button>
+    <nav class="hidden md:flex space-x-6">
+      <a href="index.html#hero" class="text-gray-700 hover:text-[#991b1b] transition">Inicio</a>
+      <a href="contacto.html" class="text-gray-700 hover:text-[#991b1b] transition">Contacto</a>
+      <a href="reservas.html" class="text-[#991b1b] font-semibold">Reservas</a>
+      <a href="reseñas.html" class="text-gray-700 hover:text-[#991b1b] transition">Reseñas</a>
+      <a href="carrito.html" class="relative text-[#991b1b] font-semibold">🛒
+        <span id="cart-count" class="absolute -top-2 -right-3 bg-[#991b1b] text-white text-xs rounded-full px-1">0</span>
+      </a>
+    </nav>
+  </div>
+
+  <nav id="mobileMenu" class="hidden md:hidden px-4 pb-4 space-y-2">
+    <a href="index.html#hero" class="block text-gray-700 hover:text-[#991b1b]">Inicio</a>
+    <a href="contacto.html" class="block text-gray-700 hover:text-[#991b1b]">Contacto</a>
+    <a href="reservas.html" class="block text-[#991b1b] font-semibold">Reservas</a>
+    <a href="reseñas.html" class="block text-gray-700 hover:text-[#991b1b]">Reseñas</a>
+    <a href="carrito.html" class="relative block text-[#991b1b] font-semibold">🛒
+      <span class="absolute -top-2 -right-3 bg-[#991b1b] text-white text-xs rounded-full px-1">0</span>
+    </a>
+  </nav>
+</header>
+
+<!-- Sección de reservas -->
+<section class="py-16 bg-hero flex-grow">
+  <div class="container mx-auto px-4 flex flex-col md:flex-row justify-center items-start gap-8">
+
+    <!-- Formulario -->
+    <div class="bg-white rounded-xl shadow-lg p-6 max-w-md w-full dish-card transition-transform flex-1">
+      <div class="text-center mb-5">
+        <h2 class="text-4xl font-bold text-gray-800 mb-2">Reserva en Línea</h2>
+        <p class="text-gray-600 text-base">Reserva tu mesa de forma rápida y sencilla.</p>
+      </div>
+      <!-- Agrega estos campos al formulario -->
+<form id="reserva-form" class="space-y-4">
+  <input type="text" id="nombre" placeholder="Nombre completo" class="w-full p-3 border border-gray-300 rounded focus:ring-2 focus:ring-[#991b1b]" required />
+  <input type="email" id="correo" placeholder="Correo electrónico" class="w-full p-3 border border-gray-300 rounded focus:ring-2 focus:ring-[#991b1b]" required />
+  <input type="tel" id="telefono" placeholder="Número de teléfono" class="w-full p-3 border border-gray-300 rounded focus:ring-2 focus:ring-[#991b1b]" required />
+  <input type="date" id="fecha" class="w-full p-3 border border-gray-300 rounded focus:ring-2 focus:ring-[#991b1b]" required />
+  <input type="time" id="hora" min="18:00" max="22:30" step="900" class="w-full p-3 border border-gray-300 rounded focus:ring-2 focus:ring-[#991b1b]" required />
+  <input type="number" id="personas" placeholder="Cantidad de personas (máx 6)" min="1" max="6" class="w-full p-3 border border-gray-300 rounded focus:ring-2 focus:ring-[#991b1b]" required />
+  <textarea id="descripcion" placeholder="Especifica si son familia o grupo de amigos" rows="3" class="w-full p-3 border border-gray-300 rounded focus:ring-2 focus:ring-[#991b1b]"></textarea>
+  <button type="submit" class="w-full bg-[#991b1b] hover:bg-[#7c2d12] text-white px-4 py-3 rounded font-semibold transition-colors">Reservar Ahora</button>
+</form>
+
+<!-- JS actualizado -->
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  const fechaInput = document.getElementById('fecha');
+  const hoy = new Date().toISOString().split('T')[0];
+  fechaInput.setAttribute('min', hoy);
+});
+
+document.getElementById('reserva-form').addEventListener('submit', function(e) {
+  e.preventDefault();
+
+  const nombre = document.getElementById('nombre').value;
+  const correo = document.getElementById('correo').value;
+  const telefono = document.getElementById('telefono').value;
+  const fecha = document.getElementById('fecha').value;
+  const hora = document.getElementById('hora').value;
+  const personas = document.getElementById('personas').value;
+  const descripcion = document.getElementById('descripcion').value;
+
+  const hoy = new Date();
+  const fechaSeleccionada = new Date(fecha);
+  hoy.setHours(0, 0, 0, 0);
+  if (fechaSeleccionada < hoy) {
+    alert("No puedes seleccionar una fecha pasada.");
+    return;
+  }
+
+  // WhatsApp
+  const mensaje = `Hola, quiero hacer una reserva:%0A%0A` +
+                  `📌 Nombre: ${encodeURIComponent(nombre)}%0A` +
+                  `📧 Correo: ${encodeURIComponent(correo)}%0A` +
+                  `📱 Teléfono: ${encodeURIComponent(telefono)}%0A` +
+                  `📅 Fecha: ${encodeURIComponent(fecha)}%0A` +
+                  `⏰ Hora: ${encodeURIComponent(hora)}%0A` +
+                  `👥 Personas: ${encodeURIComponent(personas)}%0A` +
+                  `📝 Descripción: ${encodeURIComponent(descripcion)}`;
+
+  const numeroWhatsApp = '51949249261';
+  window.open(`https://wa.me/${numeroWhatsApp}?text=${mensaje}`, '_blank');
+
+  document.getElementById('reserva-detalles').classList.remove('hidden');
+  document.getElementById('detalle-nombre').textContent = nombre;
+  document.getElementById('detalle-correo').textContent = correo;
+  document.getElementById('detalle-telefono').textContent = telefono;
+  document.getElementById('detalle-fecha').textContent = fecha;
+
+  this.reset();
+});
+</script>
+
+</body>
+</html>
