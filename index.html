@@ -164,9 +164,13 @@
 
   renderProductos();
 
-  document.getElementById('searchInput').addEventListener('input', e => {
-    renderProductos(document.querySelector('.category-btn.bg-[#a93226]')?.dataset.category || "Todos", e.target.value);
-  });
+document.getElementById('searchInput').addEventListener('input', e => {
+  const activeBtn = [...document.querySelectorAll('.category-btn')].find(btn =>
+    btn.classList.contains('bg-[#a93226]')
+  );
+  const categoria = activeBtn ? activeBtn.dataset.category : "Todos";
+  renderProductos(categoria, e.target.value);
+});
 
   document.querySelectorAll('.category-btn').forEach(btn => {
     btn.addEventListener('click', () => {
@@ -197,4 +201,5 @@
 </script>
 </body>
 </html>
+
 
