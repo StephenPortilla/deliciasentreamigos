@@ -20,7 +20,7 @@
       letter-spacing: 1px;
     }
     .bg-hero {
-      background-image: linear-gradient(rgba(80, 18, 8, 0.6), rgba(80, 18, 8, 0.6)), url('./Media/BANER.png');
+      background-image: linear-gradient(rgba(80, 18, 8, 0.6), rgba(80, 18, 8, 0.6)), url('BANER.png');
       background-size: cover;
       background-position: center;
     }
@@ -119,22 +119,22 @@
   updateCartCount();
 
   const productos = [
-    { nombre: "Alitas BBQ", descripcion: "Alitas con salsa BBQ", precio: "S/ 12.90", imagen: "./Media/BBQ.jpg", categoria: "Alitas" },
-    { nombre: "Alitas Acevichadas", descripcion: "Alitas con salsa acevichada", precio: "S/ 12.90", imagen: "./Media/ACEVICHADAS.jpg", categoria: "Alitas" },
-    { nombre: "Alitas Al Olivo", descripcion: "Alitas con salsa de olivo", precio: "S/ 12.90", imagen: "./Media/ALOLIVO.jpg", categoria: "Alitas" },
-    { nombre: "Alitas BBQ Picante", descripcion: "Alitas BBQ con toque picante", precio: "S/ 12.90", imagen: "./Media/BBQPICANTE.jpg", categoria: "Alitas" },
-    { nombre: "Alitas Chimichurri", descripcion: "Alitas con chimichurri", precio: "S/ 12.90", imagen: "./Media/CHIMICHURRI.jpg", categoria: "Alitas" },
-    { nombre: "Alitas Lemon Kay", descripcion: "Alitas con salsa Lemon Kay", precio: "S/ 12.90", imagen: "./Media/LEMONKAY.jpg", categoria: "Alitas" },
-    { nombre: "Alitas Maracuya", descripcion: "Alitas con salsa de maracuya", precio: "S/ 12.90", imagen: "./Media/MARACUYA.jpg", categoria: "Alitas" },
-    { nombre: "Chuleta", descripcion: "Chuleta con guarnición", precio: "S/ 18.90", imagen: "./Media/CHULETA.jpg", categoria: "Plato" },
-    { nombre: "Churrasco", descripcion: "Churrasco con papas", precio: "S/ 20.90", imagen: "./Media/CHURRASCO.jpg", categoria: "Plato" },
-    { nombre: "Lomo de Carne", descripcion: "Lomo saltado de carne", precio: "S/ 19.90", imagen: "./Media/LOMOCARNE.jpg", categoria: "Plato" },
-    { nombre: "Lomo de Pollo", descripcion: "Lomo saltado de pollo", precio: "S/ 18.90", imagen: "./Media/LOMOPOLLO.jpg", categoria: "Plato" },
-    { nombre: "Mostrito", descripcion: "Pollo con arroz chaufa y papas", precio: "S/ 16.90", imagen: "./Media/MOSTRITO.jpg", categoria: "Comida" },
-    { nombre: "Pollo Broaster", descripcion: "Pollo frito crocante", precio: "S/ 15.90", imagen: "./Media/POLLOBROASTER.jpg", categoria: "Comida" },
-    { nombre: "Pollo a la Plancha", descripcion: "Pollo a la plancha con ensalada", precio: "S/ 15.90", imagen: "./Media/POLLOPLANCHA.jpg", categoria: "Comida" },
-    { nombre: "Salchipapa", descripcion: "Salchipapa tradicional", precio: "S/ 10.90", imagen: "./Media/SALCHIPAPA.jpg", categoria: "Comida" },
-    { nombre: "Salchipollo", descripcion: "Salchipapa con pollo", precio: "S/ 12.90", imagen: "./Media/SALCHIPOLLO.jpg", categoria: "Comida" }
+    { nombre: "Alitas BBQ", descripcion: "Alitas con salsa BBQ", precio: "S/ 12.90", imagen: "BBQ.jpg", categoria: "Alitas" },
+    { nombre: "Alitas Acevichadas", descripcion: "Alitas con salsa acevichada", precio: "S/ 12.90", imagen: "ACEVICHADAS.jpg", categoria: "Alitas" },
+    { nombre: "Alitas Al Olivo", descripcion: "Alitas con salsa de olivo", precio: "S/ 12.90", imagen: "ALOLIVO.jpg", categoria: "Alitas" },
+    { nombre: "Alitas BBQ Picante", descripcion: "Alitas BBQ con toque picante", precio: "S/ 12.90", imagen: "BBQPICANTE.jpg", categoria: "Alitas" },
+    { nombre: "Alitas Chimichurri", descripcion: "Alitas con chimichurri", precio: "S/ 12.90", imagen: "CHIMICHURRI.jpg", categoria: "Alitas" },
+    { nombre: "Alitas Lemon Kay", descripcion: "Alitas con salsa Lemon Kay", precio: "S/ 12.90", imagen: "LEMONKAY.jpg", categoria: "Alitas" },
+    { nombre: "Alitas Maracuya", descripcion: "Alitas con salsa de maracuya", precio: "S/ 12.90", imagen: "MARACUYA.jpg", categoria: "Alitas" },
+    { nombre: "Chuleta", descripcion: "Chuleta con guarnición", precio: "S/ 18.90", imagen: "CHULETA.jpg", categoria: "Plato" },
+    { nombre: "Churrasco", descripcion: "Churrasco con papas", precio: "S/ 20.90", imagen: "CHURRASCO.jpg", categoria: "Plato" },
+    { nombre: "Lomo de Carne", descripcion: "Lomo saltado de carne", precio: "S/ 19.90", imagen: "LOMOCARNE.jpg", categoria: "Plato" },
+    { nombre: "Lomo de Pollo", descripcion: "Lomo saltado de pollo", precio: "S/ 18.90", imagen: "LOMOPOLLO.jpg", categoria: "Plato" },
+    { nombre: "Mostrito", descripcion: "Pollo con arroz chaufa y papas", precio: "S/ 16.90", imagen: "MOSTRITO.jpg", categoria: "Comida" },
+    { nombre: "Pollo Broaster", descripcion: "Pollo frito crocante", precio: "S/ 15.90", imagen: "POLLOBROASTER.jpg", categoria: "Comida" },
+    { nombre: "Pollo a la Plancha", descripcion: "Pollo a la plancha con ensalada", precio: "S/ 15.90", imagen: "POLLOPLANCHA.jpg", categoria: "Comida" },
+    { nombre: "Salchipapa", descripcion: "Salchipapa tradicional", precio: "S/ 10.90", imagen: "SALCHIPAPA.jpg", categoria: "Comida" },
+    { nombre: "Salchipollo", descripcion: "Salchipapa con pollo", precio: "S/ 12.90", imagen: "SALCHIPOLLO.jpg", categoria: "Comida" }
   ];
 
   const productGrid = document.getElementById('productGrid');
@@ -197,3 +197,4 @@
 </script>
 </body>
 </html>
+
